@@ -1,0 +1,7 @@
+{
+  "name": "shlu-github-actions-s3-demo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
