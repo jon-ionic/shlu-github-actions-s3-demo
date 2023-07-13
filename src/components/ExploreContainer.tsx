@@ -5,7 +5,7 @@ interface ContainerProps { }
 const ExploreContainer: React.FC<ContainerProps> = () => {
   return (
     <div id="container">
-      <strong>Live update 1</strong>
+      <strong>Native version 0.0.1</strong>
     </div>
   );
 };
