@@ -32,4 +32,15 @@ jobs:
       run: npm run build
 
     - name: bundle artifact
-      run: ionic-cloud live-update bundle-artifact --build-dir=dist --signing-key=${{ secrets.IONIC_PRIVATE_KEY }} --output-path=build.zip
+      run: ionic-cloud live-update bundle-artifact --build-dir=dist --signing-key="${{ secrets.IONIC_PRIVATE_KEY }}" --output-path=build.zip
+      
+    - name: configure aws credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-2
+        
+    - name: copy bundle to aws
+      run: |
+        aws s3 cp build.zip s3://shlu-github-actions-s3-demo
