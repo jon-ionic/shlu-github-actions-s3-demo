@@ -32,7 +32,7 @@ jobs:
       run: npm run build
 
     - name: bundle artifact
-      run: ionic-cloud live-update bundle-artifact --build-dir=dist --signing-key="${{ secrets.IONIC_PRIVATE_KEY }}" --output-path=build.zip
+      run: ionic-cloud live-update bundle-artifact --build-dir=dist --signing-key="${{ secrets.IONIC_PRIVATE_KEY }}" --output-path="$GITHUB_SHA.zip"
       
     - name: configure aws credentials
       uses: aws-actions/configure-aws-credentials@v2
@@ -43,7 +43,7 @@ jobs:
         
     - name: copy bundle to aws
       run: |
-        aws s3 cp build.zip s3://shlu-github-actions-s3-demo --acl public-read
+        aws s3 cp "$GITHUB_SHA.zip" s3://shlu-github-actions-s3-demo --acl public-read
 
     - name: register artifact
       run: |
@@ -52,7 +52,7 @@ jobs:
         --commit-sha=$GITHUB_SHA \
         --commit-ref=main \
         --commit-message="${{ github.event.head_commit.message }}" \
-        --artifact-url=https://shlu-github-actions-s3-demo.s3.us-east-2.amazonaws.com/build.zip \
+        --artifact-url="https://shlu-github-actions-s3-demo.s3.us-east-2.amazonaws.com/$GITHUB_SHA.zip" \
         --json
 
     
