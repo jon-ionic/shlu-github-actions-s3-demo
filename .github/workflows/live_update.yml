@@ -43,7 +43,7 @@ jobs:
         
     - name: copy bundle to aws
       run: |
-        aws s3 cp build.zip s3://shlu-github-actions-s3-demo
+        aws s3 cp build.zip s3://shlu-github-actions-s3-demo --acl public-read
 
     - name: register artifact
       run: |
