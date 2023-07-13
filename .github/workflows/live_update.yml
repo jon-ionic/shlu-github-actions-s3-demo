@@ -1,0 +1,35 @@
+name: Deploy live update
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  LiveUpdate-Deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      IONIC_TOKEN: ${{ secrets.IONIC_TOKEN }}
+      APP_ID: '42f81456'
+    
+    steps:
+    - name: install cloud cli
+      run: curl -sL https://ionic.io/get-ionic-cloud-cli | bash
+    
+    - name: checkout repository
+      uses: actions/checkout@v2
+
+    - name: setup node
+      uses: actions/setup-node@v2
+      with:
+        node-version: 18
+
+    - name: install dependencies
+      run: npm install
+
+    - name: build project
+      run: npm run build
+
+    - name: bundle artifact
+      run: ionic-cloud live-update bundle-artifact --build-dir=dist --signing-key=${{ secrets.IONIC_PRIVATE_KEY }} --output-path=build.zip
