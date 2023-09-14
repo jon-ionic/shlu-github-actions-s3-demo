@@ -53,6 +53,6 @@ jobs:
         --commit-sha=$GITHUB_SHA \
         --commit-ref=main \
         --commit-message="${{ github.event.head_commit.message }}" \
-        --artifact-url="https://shlu-github-actions-s3-demo.s3.us-east-2.amazonaws.com/$GITHUB_SHA.zip" \
+        --artifact-url="https://shlu-github-actions-s3-demo.s3.us-east-2.amazonaws.com/$GITHUB_SHA/live-update-manifest.json" \
         --artifact-type=manifest \
         --json
