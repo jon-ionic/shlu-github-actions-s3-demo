@@ -5,7 +5,7 @@ interface ContainerProps { }
 const ExploreContainer: React.FC<ContainerProps> = () => {
   return (
     <div id="container">
-      <strong>Live update 0.0.1 - 4</strong>
+      <strong>Differential live update - 0.0.1</strong>
     </div>
   );
 };
