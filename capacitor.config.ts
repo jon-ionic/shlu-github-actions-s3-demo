@@ -5,7 +5,7 @@ const liveUpdatesConfig: LiveUpdateConfig = {
   channel: 'prod-0.0.1',
   autoUpdateMethod: 'background',
   maxVersions: 2,
-  key: 'ionic_cloud_public.pem'
+  key: 'ionic_cloud_public.pem',
 }
 
 const config: CapacitorConfig = {
