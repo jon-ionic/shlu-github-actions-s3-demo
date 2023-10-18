@@ -1,13 +1,5 @@
 import { CapacitorConfig, LiveUpdateConfig } from '@capacitor/cli';
 
-const liveUpdatesConfig: LiveUpdateConfig = {
-  appId: '42f81456',
-  channel: 'prod-0.0.1',
-  autoUpdateMethod: 'background',
-  maxVersions: 2,
-  key: 'ionic_cloud_public.pem',
-}
-
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
   appName: 'shlu-github-actions-s3-demo',
@@ -16,7 +8,13 @@ const config: CapacitorConfig = {
     androidScheme: 'https'
   },
   plugins: {
-    LiveUpdates: liveUpdatesConfig,
+    LiveUpdates: {
+      appId: '42f81456',
+      channel: 'prod-0.0.1',
+      autoUpdateMethod: 'background',
+      maxVersions: 2,
+      key: 'ionic_cloud_public.pem',
+    },
   }
 };
 
