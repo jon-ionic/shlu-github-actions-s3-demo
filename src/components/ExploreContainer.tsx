@@ -11,7 +11,7 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
     <div id="container">
       <IonCard>
         <IonCardContent>
-          <strong>Differential live update - 0.0.1</strong>
+          <strong>.txt public key</strong>
           <IonButton 
             onClick={async () => setSyncResp(JSON.stringify(await sync()))} 
             style={{ display: 'flex', justifyContent: 'center'}}
