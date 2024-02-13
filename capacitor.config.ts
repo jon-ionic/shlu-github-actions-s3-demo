@@ -11,7 +11,7 @@ const config: CapacitorConfig = {
     LiveUpdates: {
       appId: '42f81456',
       channel: 'prod-0.0.1',
-      autoUpdateMethod: 'background',
+      autoUpdateMethod: 'none',
       maxVersions: 2,
       key: 'ionic_cloud_public.pem',
     },
