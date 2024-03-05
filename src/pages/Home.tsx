@@ -23,6 +23,7 @@ const Home: React.FC = () => {
   const [channel, setChannel] = useState<string>('');
   const [channelFromConfig, setChannelFromConfig] = useState<string>('');
   const [toastOpen, setToastOpen] = useState<boolean>(false);
+  const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
     updateConfigState()
@@ -59,6 +60,20 @@ const Home: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <div id='container'>
+          <IonCard>
+            <IonCardHeader>
+              <IonCardTitle>Count: {count}</IonCardTitle>
+            </IonCardHeader>
+            <IonCardContent>
+              <IonButton 
+                onClick={() => setCount((prev: number) => prev + 1)} 
+                style={{ display: 'flex', justifyContent: 'center'}}
+              >
+                Increment
+              </IonButton>
+            </IonCardContent>
+          </IonCard>
+
           <IonCard>
             <IonCardHeader>
               <IonCardTitle>Select Channel ({channelFromConfig || 'not set'})</IonCardTitle>
