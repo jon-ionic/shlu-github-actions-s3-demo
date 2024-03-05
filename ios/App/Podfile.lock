@@ -8,7 +8,7 @@ PODS:
     - Capacitor
   - CapacitorKeyboard (5.0.6):
     - Capacitor
-  - CapacitorLiveUpdates (0.1.1-beta.6):
+  - CapacitorLiveUpdates (0.1.1):
     - Capacitor
     - IonicLiveUpdates (~> 0.5.0)
   - CapacitorStatusBar (5.0.6):
@@ -50,7 +50,7 @@ SPEC CHECKSUMS:
   CapacitorCordova: 225d4817e9673b8dbcef8d9a3ccbd37f1f1c26cd
   CapacitorHaptics: 1fffc1217c7e64a472d7845be50fb0c2f7d4204c
   CapacitorKeyboard: b978154b024a5f65e044908e37d15b7de58b9d12
-  CapacitorLiveUpdates: ae36ca6fda2559d8d63880f717bc97ed554ba438
+  CapacitorLiveUpdates: ea9da7383f574de8793bcd6d39d706551a86c502
   CapacitorStatusBar: 565c0a1ebd79bb40d797606a8992b4a105885309
   IonicLiveUpdates: 321d34fc5d6ae60d6145451f8f1c7b8971f0401d
 
