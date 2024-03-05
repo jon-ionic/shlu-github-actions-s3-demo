@@ -16,6 +16,7 @@ import {
 } from '@ionic/react';
 import { sync, reload, getConfig, setConfig, resetConfig, SyncResult } from '@capacitor/live-updates';
 import { useState, useEffect } from 'react';
+import { App } from '@capacitor/app';
 import './Home.css';
 
 const Home: React.FC = () => {
@@ -23,6 +24,23 @@ const Home: React.FC = () => {
   const [channel, setChannel] = useState<string>('');
   const [channelFromConfig, setChannelFromConfig] = useState<string>('');
   const [toastOpen, setToastOpen] = useState<boolean>(false);
+
+  const initializeApp = async () => {
+    App.addListener('resume', async () => {
+      if (localStorage.shouldReloadApp) await reload();
+      else {
+        const result = await sync();
+        localStorage.shouldReloadApp = result.activeApplicationPathChanged;
+      }
+    });
+
+    const result = await sync();
+    localStorage.shouldReloadApp = result.activeApplicationPathChanged;
+  }
+
+  useEffect(() => {
+    initializeApp()
+  })
 
   useEffect(() => {
     updateConfigState()
