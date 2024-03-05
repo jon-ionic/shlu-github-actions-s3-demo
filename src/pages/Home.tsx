@@ -25,22 +25,22 @@ const Home: React.FC = () => {
   const [channelFromConfig, setChannelFromConfig] = useState<string>('');
   const [toastOpen, setToastOpen] = useState<boolean>(false);
 
-  const initializeApp = async () => {
-    App.addListener('resume', async () => {
-      if (localStorage.shouldReloadApp) await reload();
-      else {
-        const result = await sync();
-        localStorage.shouldReloadApp = result.activeApplicationPathChanged;
-      }
-    });
-
-    const result = await sync();
-    localStorage.shouldReloadApp = result.activeApplicationPathChanged;
-  }
-
   useEffect(() => {
+    const initializeApp = async () => {
+      App.addListener('resume', async () => {
+        if (localStorage.shouldReloadApp) await reload();
+        else {
+          const result = await sync();
+          localStorage.shouldReloadApp = result.activeApplicationPathChanged;
+        }
+      });
+  
+      const result = await sync();
+      localStorage.shouldReloadApp = result.activeApplicationPathChanged;
+    }
+
     initializeApp()
-  })
+  }, [])
 
   useEffect(() => {
     updateConfigState()
