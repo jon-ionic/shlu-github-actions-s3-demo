@@ -29,24 +29,16 @@ const Home: React.FC = () => {
   useEffect(() => {
     const initializeApp = async () => {
       App.addListener('resume', async () => {
-        console.log({ shouldReloadApp: localStorage.shouldReloadApp })
-        if (localStorage.shouldReloadApp) {
-          console.log('Reloading...')
+        if (localStorage.shouldReloadApp === 'true') {
           await reload();
-        }
-        else {
-          console.log('Not reloading...')
+        } else {
           const result = await sync();
-          console.log(`Setting shouldReloadApp to ${result.activeApplicationPathChanged}...`)
           localStorage.shouldReloadApp = result.activeApplicationPathChanged;
         }
       });
   
-      console.log('Syncing...')
       const result = await sync();
-      console.log(`Setting shouldReloadApp to ${result.activeApplicationPathChanged}...`)
       localStorage.shouldReloadApp = result.activeApplicationPathChanged;
-      console.log({ shouldReloadApp: localStorage.shouldReloadApp })
     }
 
     initializeApp()
