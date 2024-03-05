@@ -46,6 +46,7 @@ const Home: React.FC = () => {
       const result = await sync();
       console.log(`Setting shouldReloadApp to ${result.activeApplicationPathChanged}...`)
       localStorage.shouldReloadApp = result.activeApplicationPathChanged;
+      console.log({ shouldReloadApp: localStorage.shouldReloadApp })
     }
 
     initializeApp()
