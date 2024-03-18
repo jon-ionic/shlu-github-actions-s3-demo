@@ -1,0 +1,58 @@
+name: Deploy Unsigned Self-Hosted Live Update
+
+on:
+  push:
+    branches:
+    - 'unsigned-bundle'
+
+jobs:
+  LiveUpdate-Deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      IONIC_TOKEN: ${{ secrets.IONIC_TOKEN }}
+      APP_ID: '42f81456'
+    
+    steps:
+    - name: Install Ionic Cloud CLI
+      run: curl -sL https://ionic.io/get-ionic-cloud-cli | bash
+    
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: 18
+
+    - name: Install project dependencies
+      run: npm install
+
+    - name: Build project
+      run: npm run build
+
+    - name: Generate manifest file
+      run: |
+        ionic-cloud live-update generate-manifest \
+        --build-dir=dist
+      
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-2
+        
+    - name: Copy bundle to AWS
+      run: |
+        aws s3 sync dist s3://shlu-github-actions-s3-demo/$GITHUB_SHA --acl public-read
+
+    - name: Register artifact with Appflow
+      run: |
+        ionic-cloud live-update register-artifact \
+        --app-id=$APP_ID \
+        --commit-sha=$GITHUB_SHA \
+        --commit-ref=main \
+        --commit-message="${{ github.event.head_commit.message }}" \
+        --artifact-url="https://shlu-github-actions-s3-demo.s3.us-east-2.amazonaws.com/$GITHUB_SHA/live-update-manifest.json" \
+        --artifact-type=manifest
