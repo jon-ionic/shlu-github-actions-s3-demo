@@ -50,13 +50,13 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Unsigned Live Update</IonTitle>
+          <IonTitle>Unsigned Native Build</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Unsigned Live Update</IonTitle>
+            <IonTitle size="large">Unsigned Native Build</IonTitle>
           </IonToolbar>
         </IonHeader>
         <div id='container'>
