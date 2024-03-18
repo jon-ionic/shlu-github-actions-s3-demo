@@ -13,7 +13,6 @@ const config: CapacitorConfig = {
       channel: 'prod-0.0.1',
       autoUpdateMethod: 'none',
       maxVersions: 2,
-      key: 'ionic_cloud_public.pem',
     },
   }
 };
