@@ -2,6 +2,9 @@ name: Deploy Self-Hosted Live Update
 
 on:
   push:
+    branches:
+    - main
+    - 'update/**'
 
 jobs:
   LiveUpdate-Deploy:
