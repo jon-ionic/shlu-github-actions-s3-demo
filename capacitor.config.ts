@@ -8,13 +8,6 @@ const config: CapacitorConfig = {
     androidScheme: 'https'
   },
   plugins: {
-    LiveUpdates: {
-      appId: '42f81456',
-      channel: 'prod-0.0.1',
-      autoUpdateMethod: 'none',
-      maxVersions: 2,
-      key: 'ionic_cloud_public.pem',
-    },
   }
 };
 
