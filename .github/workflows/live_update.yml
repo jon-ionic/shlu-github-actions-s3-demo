@@ -16,7 +16,7 @@ jobs:
     
     steps:
     - name: Install Ionic Cloud CLI
-      run: curl -sL https://ionic.io/get-ionic-cloud-cli | bash
+      run: curl -sL https://ionic.io/get-appflow-cli | bash
     
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -24,17 +24,17 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v2
       with:
-        node-version: 18
+        node-version: 20
 
     - name: Install project dependencies
-      run: npm install
+      run: npm ci
 
     - name: Build project
       run: npm run build
 
     - name: Generate manifest file
       run: |
-        ionic-cloud live-update generate-manifest \
+        appflow live-update generate-manifest \
         --build-dir=dist \
         --signing-key="${{ secrets.IONIC_PRIVATE_KEY }}"
       
@@ -51,7 +51,7 @@ jobs:
 
     - name: Register artifact with Appflow
       run: |
-        ionic-cloud live-update register-artifact \
+        appflow live-update register-artifact \
         --app-id=$APP_ID \
         --commit-sha=$GITHUB_SHA \
         --commit-ref=main \
