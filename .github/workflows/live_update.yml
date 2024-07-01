@@ -36,8 +36,7 @@ jobs:
     - name: Generate manifest file
       run: |
         ionic-cloud live-update generate-manifest \
-        --build-dir=dist \
-        --signing-key="${{ secrets.IONIC_PRIVATE_KEY }}"
+        --build-dir=dist
       
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v2
