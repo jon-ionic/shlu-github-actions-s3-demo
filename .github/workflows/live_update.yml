@@ -5,6 +5,7 @@ on:
     branches:
     - main
     - 'update/**'
+    - 'self-hosted-portal-webapp'
 
 jobs:
   LiveUpdate-Deploy:
