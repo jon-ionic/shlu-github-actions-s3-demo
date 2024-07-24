@@ -30,3 +30,4 @@ yarn-error.log*
 dist
 
 ionic_cloud_private.pem
+dist2

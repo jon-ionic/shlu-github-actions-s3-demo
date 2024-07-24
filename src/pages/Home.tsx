@@ -24,6 +24,10 @@ const Home: React.FC = () => {
   const [channelFromConfig, setChannelFromConfig] = useState<string>('');
   const [toastOpen, setToastOpen] = useState<boolean>(false);
   const [count, setCount] = useState<number>(0);
+  
+  useEffect(() => {
+    setConfig({ channel: 'production-A' })
+  })
 
   useEffect(() => {
     updateConfigState()
