@@ -10,7 +10,7 @@
     "test.e2e": "cypress run",
     "test.unit": "vitest",
     "lint": "eslint",
-    "postbuild": "echo test > dist/testing+filenames.png"
+    "postbuild": "echo test > dist/testing+filenames.txt"
   },
   "dependencies": {
     "@capacitor/android": "^5.2.0",
