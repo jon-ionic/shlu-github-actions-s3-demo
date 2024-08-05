@@ -9,8 +9,7 @@
     "preview": "vite preview",
     "test.e2e": "cypress run",
     "test.unit": "vitest",
-    "lint": "eslint",
-    "postbuild": "echo test > dist/testing+filenames.txt"
+    "lint": "eslint"
   },
   "dependencies": {
     "@capacitor/android": "^5.2.0",
