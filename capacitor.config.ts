@@ -1,4 +1,4 @@
-import { CapacitorConfig, LiveUpdateConfig } from '@capacitor/cli';
+import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
