@@ -14,38 +14,25 @@ import {
   IonToast,
   IonText,
 } from '@ionic/react';
-import { sync, reload, getConfig, setConfig, resetConfig, SyncResult } from '@capacitor/live-updates';
-import { useState, useEffect } from 'react';
+import { sync, reload, SyncResult } from '@capacitor/live-updates';
+import { useState } from 'react';
 import './Home.css';
 
 const Home: React.FC = () => {
   const [syncResp, setSyncResp] = useState<SyncResult | null>(null);
-  const [channel, setChannel] = useState<string>('');
-  const [channelFromConfig, setChannelFromConfig] = useState<string>('');
   const [toastOpen, setToastOpen] = useState<boolean>(false);
   const [count, setCount] = useState<number>(0);
+  const [downloadProgress, setDownloadProgress] = useState<number>(0);
   
-  useEffect(() => {
-    setConfig({ channel: 'production-A' })
-  })
-
-  useEffect(() => {
-    updateConfigState()
-  }, [channel])
-
-  const updateConfigState = async () => {
-    const config = await getConfig();
-    setChannelFromConfig(config?.channel || '')
-  }
-
   const handleSync = async () => {
-    setSyncResp(await sync())
-  }
-
-  const handleChannelUpdate = async () => {
-    await setConfig({ channel });
-    updateConfigState();
-    setToastOpen(true)
+    try {
+      const resp = await sync()
+      console.log('sync completed')
+      console.log({syncResponse: resp})
+      setSyncResp(resp)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   const VERSION = '0.0.1'
@@ -80,47 +67,12 @@ const Home: React.FC = () => {
 
           <IonCard>
             <IonCardHeader>
-              <IonCardTitle>Select Channel ({channelFromConfig || 'not set'})</IonCardTitle>
-            </IonCardHeader>
-            <IonCardContent>
-              <IonSelect 
-                label="Channel"
-                onIonChange={(e) => setChannel(e.detail.value)}
-                value={channel}
-              >
-                {
-                  [
-                    { label: 'Production', value: 'prod-0.0.1'},
-                    { label: 'Development', value: 'dev-0.0.1'},
-                  ].map((item: {label: string, value: string}) => (
-                    <IonSelectOption value={item.value}>
-                      {item.label}
-                    </IonSelectOption>)
-                  )
-                }
-              </IonSelect>
-              <IonButton
-                onClick={handleChannelUpdate}
-                style={{ display: 'flex'}}
-              >
-                Save Channel
-              </IonButton>
-              <IonButton
-                onClick={resetConfig}
-                color='danger'
-                style={{ display: 'flex'}}
-              >Reset Config</IonButton>
-            </IonCardContent>
-          </IonCard>
-
-          <IonCard>
-            <IonCardHeader>
               <IonCardTitle>Sync Live Update (current version {VERSION})</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
-              {(syncResp?.liveUpdate?.channel && syncResp?.snapshot?.buildId) && (
+              {downloadProgress > 0 && (
                 <IonText>
-                  Downloaded build id {syncResp?.snapshot?.buildId} from {syncResp?.liveUpdate?.channel} channel.
+                  {downloadProgress}% downloaded.
                 </IonText>
               )}
               {syncResp && (<pre style={{ overflowWrap: 'normal', textAlign: 'left', display: 'inline-block' }}>
