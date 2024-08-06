@@ -24,10 +24,7 @@ const Home: React.FC = () => {
   const [channelFromConfig, setChannelFromConfig] = useState<string>('');
   const [toastOpen, setToastOpen] = useState<boolean>(false);
   const [count, setCount] = useState<number>(0);
-  
-  useEffect(() => {
-    setConfig({ channel: 'production-A' })
-  })
+  const [downloadProgress, setDownloadProgress] = useState<number>(0);
 
   useEffect(() => {
     updateConfigState()
@@ -39,7 +36,10 @@ const Home: React.FC = () => {
   }
 
   const handleSync = async () => {
-    setSyncResp(await sync())
+    const resp = await sync((percentage: number) => {
+      setDownloadProgress(percentage)
+    })
+    setSyncResp(resp)
   }
 
   const handleChannelUpdate = async () => {
@@ -118,6 +118,11 @@ const Home: React.FC = () => {
               <IonCardTitle>Sync Live Update (current version {VERSION})</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
+              {(downloadProgress > 0 && downloadProgress < 1) && (
+                <IonText>
+                  {Math.round(downloadProgress * 100)}% downloaded.
+                </IonText>
+              )}
               {(syncResp?.liveUpdate?.channel && syncResp?.snapshot?.buildId) && (
                 <IonText>
                   Downloaded build id {syncResp?.snapshot?.buildId} from {syncResp?.liveUpdate?.channel} channel.
