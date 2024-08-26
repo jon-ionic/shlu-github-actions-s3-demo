@@ -48,7 +48,7 @@ const Home: React.FC = () => {
     setToastOpen(true)
   }
 
-  const VERSION = '0.0.1'
+  const VERSION = '6.0.0'
 
   return (
     <IonPage>
