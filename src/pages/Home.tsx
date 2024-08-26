@@ -16,6 +16,7 @@ import {
 } from '@ionic/react';
 import { sync, reload, getConfig, setConfig, resetConfig, SyncResult } from '@capacitor/live-updates';
 import { useState, useEffect } from 'react';
+import { SplashScreen } from '@capacitor/splash-screen';
 import './Home.css';
 
 const Home: React.FC = () => {
@@ -27,8 +28,19 @@ const Home: React.FC = () => {
   const [downloadProgress, setDownloadProgress] = useState<number>(0);
 
   useEffect(() => {
-    updateConfigState()
-  }, [channel])
+    const update = async () => {
+      console.log('running live update')
+      const result = await sync();
+      console.log(result);
+      if (result.activeApplicationPathChanged) {
+        await reload();
+      } else {
+        await SplashScreen.hide();
+      }
+    }
+
+    update();
+  }, [])
 
   const updateConfigState = async () => {
     const config = await getConfig();
@@ -48,7 +60,7 @@ const Home: React.FC = () => {
     setToastOpen(true)
   }
 
-  const VERSION = '6.0.0'
+  const VERSION = '6.0.1'
 
   return (
     <IonPage>
