@@ -27,21 +27,6 @@ const Home: React.FC = () => {
   const [count, setCount] = useState<number>(0);
   const [downloadProgress, setDownloadProgress] = useState<number>(0);
 
-  useEffect(() => {
-    const update = async () => {
-      console.log('running live update')
-      const result = await sync();
-      console.log(result);
-      if (result.activeApplicationPathChanged) {
-        await reload();
-      } else {
-        await SplashScreen.hide();
-      }
-    }
-
-    update();
-  }, [])
-
   const updateConfigState = async () => {
     const config = await getConfig();
     setChannelFromConfig(config?.channel || '')

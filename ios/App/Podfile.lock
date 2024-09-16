@@ -15,7 +15,7 @@ PODS:
     - Capacitor
   - CapacitorStatusBar (6.0.0):
     - Capacitor
-  - IonicLiveUpdates (0.5.4)
+  - IonicLiveUpdates (0.5.5)
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
@@ -58,7 +58,7 @@ SPEC CHECKSUMS:
   CapacitorLiveUpdates: 82cf6e546e739075d805de2eef30df1caec1fbcd
   CapacitorSplashScreen: 250df9ef8014fac5c7c1fd231f0f8b1d8f0b5624
   CapacitorStatusBar: 2e4369f99166125435641b1908d05f561eaba6f6
-  IonicLiveUpdates: 18ed782e601689066fdd9f79a3a6d7f809f9f6d7
+  IonicLiveUpdates: 656600ecd2cbaad5d5522aedd35958b9cf20b943
 
 PODFILE CHECKSUM: 25f78fbdf05e0638c0db3798b26b4d9352a59e58
 
