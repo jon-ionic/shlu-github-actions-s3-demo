@@ -73,7 +73,7 @@ const Home: React.FC = () => {
             <IonTitle size="large">Capacitor Live Updates</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <div id='container'>
+        <IonContent>
           <IonCard>
             <IonCardHeader>
               <IonCardTitle>Count: {count}</IonCardTitle>
@@ -168,7 +168,7 @@ const Home: React.FC = () => {
               </IonButton>
             </IonCardContent>
           </IonCard>
-        </div>
+        </IonContent>
       
         <IonToast
           isOpen={toastOpen}
