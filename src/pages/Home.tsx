@@ -7,42 +7,55 @@ import {
   IonCardHeader,
   IonCardContent,
   IonCard,
-  IonSelect,
   IonCardTitle,
-  IonSelectOption,
   IonButton,
   IonToast,
   IonText,
+  IonInput,
 } from '@ionic/react';
-import { sync, reload, getConfig, setConfig, resetConfig, SyncResult } from '@capacitor/live-updates';
+import { sync, reload, getConfig, setConfig, resetConfig, SyncResult, LiveUpdateConfig } from '@capacitor/live-updates';
 import { useState, useEffect } from 'react';
-import { SplashScreen } from '@capacitor/splash-screen';
 import './Home.css';
 
 const Home: React.FC = () => {
   const [syncResp, setSyncResp] = useState<SyncResult | null>(null);
   const [channel, setChannel] = useState<string>('');
-  const [channelFromConfig, setChannelFromConfig] = useState<string>('');
+  const [appId, setAppId] = useState<string>('');
+  const [strategy, setStrategy] = useState<string>('');
+  const [liveUpdateConfig, setLiveUpdateConfig] = useState<LiveUpdateConfig>({ appId: 'Not set', channel: 'Not set'})
   const [toastOpen, setToastOpen] = useState<boolean>(false);
   const [count, setCount] = useState<number>(0);
   const [downloadProgress, setDownloadProgress] = useState<number>(0);
 
+  useEffect(() => {
+    updateConfigState();
+  }, [])
+
   const updateConfigState = async () => {
     const config = await getConfig();
-    setChannelFromConfig(config?.channel || '')
+    setLiveUpdateConfig(config);
+    setAppId(config?.appId || 'Not set');
+    setChannel(config?.channel || 'Not set');
+    setStrategy(config?.strategy || 'Not set');
   }
 
   const handleSync = async () => {
     const resp = await sync((percentage: number) => {
-      setDownloadProgress(percentage)
+      setDownloadProgress(percentage);
     })
-    setSyncResp(resp)
+    setSyncResp(resp);
   }
 
-  const handleChannelUpdate = async () => {
-    await setConfig({ channel });
+  const handleConfigUpdate = async () => {
+    const normalizedStrategy = strategy === 'zip' || strategy === 'differential' ? strategy : undefined;
+    await setConfig({ channel, appId, strategy: normalizedStrategy });
     updateConfigState();
     setToastOpen(true)
+  }
+
+  const handleConfigReset = async () => {
+    await resetConfig();
+    await updateConfigState();
   }
 
   const VERSION = '6.0.1'
@@ -77,33 +90,38 @@ const Home: React.FC = () => {
 
           <IonCard>
             <IonCardHeader>
-              <IonCardTitle>Select Channel ({channelFromConfig || 'not set'})</IonCardTitle>
+              <IonCardTitle>Set Config</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
-              <IonSelect 
-                label="Channel"
-                onIonChange={(e) => setChannel(e.detail.value)}
+              <IonInput
+                label='App ID'
+                labelPlacement='stacked'
+                placeholder={liveUpdateConfig?.appId || 'Not set'}
+                value={appId}
+                onIonInput={(e) => setAppId(e.target?.value?.toString() || '')}
+              ></IonInput>
+              <IonInput
+                label='Channel'
+                labelPlacement='stacked'
+                placeholder={liveUpdateConfig?.channel || 'Not set'}
                 value={channel}
-              >
-                {
-                  [
-                    { label: 'Production', value: 'prod-0.0.1'},
-                    { label: 'Development', value: 'dev-0.0.1'},
-                  ].map((item: {label: string, value: string}) => (
-                    <IonSelectOption value={item.value}>
-                      {item.label}
-                    </IonSelectOption>)
-                  )
-                }
-              </IonSelect>
+                onIonInput={(e) => setChannel(e.target?.value?.toString() || '')}
+              />
+              <IonInput
+                label='Strategy'
+                labelPlacement='stacked'
+                placeholder={liveUpdateConfig?.strategy || 'Not set'}
+                value={strategy}
+                onIonInput={(e) => setStrategy(e.target?.value?.toString() || '')}
+              />
               <IonButton
-                onClick={handleChannelUpdate}
+                onClick={handleConfigUpdate}
                 style={{ display: 'flex'}}
               >
-                Save Channel
+                Save Config
               </IonButton>
               <IonButton
-                onClick={resetConfig}
+                onClick={handleConfigReset}
                 color='danger'
                 style={{ display: 'flex'}}
               >Reset Config</IonButton>
