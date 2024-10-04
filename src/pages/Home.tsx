@@ -74,7 +74,7 @@ const Home: React.FC = () => {
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="small">Demo (${packageJsonVersion})</IonTitle>
+            <IonTitle size="large">Demo ({packageJsonVersion})</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent>
