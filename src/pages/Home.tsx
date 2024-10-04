@@ -15,6 +15,7 @@ import {
 } from '@ionic/react';
 import { sync, reload, getConfig, setConfig, resetConfig, SyncResult, LiveUpdateConfig } from '@capacitor/live-updates';
 import { useState, useEffect } from 'react';
+import packageJson from '../../package.json';
 import './Home.css';
 
 const Home: React.FC = () => {
@@ -22,7 +23,7 @@ const Home: React.FC = () => {
   const [channel, setChannel] = useState<string>('');
   const [appId, setAppId] = useState<string>('');
   const [strategy, setStrategy] = useState<string>('');
-  const [liveUpdateConfig, setLiveUpdateConfig] = useState<LiveUpdateConfig>({ appId: 'Not set', channel: 'Not set'})
+  const [liveUpdateConfig, setLiveUpdateConfig] = useState<LiveUpdateConfig>({ appId: 'Not set', channel: 'Not set'});
   const [toastOpen, setToastOpen] = useState<boolean>(false);
   const [count, setCount] = useState<number>(0);
   const [downloadProgress, setDownloadProgress] = useState<number>(0);
@@ -50,7 +51,7 @@ const Home: React.FC = () => {
     const normalizedStrategy = strategy === 'zip' || strategy === 'differential' ? strategy : undefined;
     await setConfig({ channel, appId, strategy: normalizedStrategy });
     updateConfigState();
-    setToastOpen(true)
+    setToastOpen(true);
   }
 
   const handleConfigReset = async () => {
@@ -58,19 +59,22 @@ const Home: React.FC = () => {
     await updateConfigState();
   }
 
-  const VERSION = '6.0.1'
+  const VERSION = '6.0.1';
+
+  const packageJsonVersion = packageJson.version
+  console.log(packageJsonVersion)
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Capacitor Live Updates</IonTitle>
+          <IonTitle size="large">Demo ({packageJsonVersion})</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Capacitor Live Updates</IonTitle>
+            <IonTitle size="small">Demo (${packageJsonVersion})</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent>
