@@ -1,7 +1,16 @@
 {
   "name": "shlu-github-actions-s3-demo",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "enterprise": {
+      "keyId": 21794,
+      "productKey": "key_299529bd75c4465d92fa2092f3eb03c4",
+      "appId": "42f81456",
+      "orgId": "3a7f6032-3b61-43a0-8acc-772064c26dbf",
+      "registries": [
+        "@ionic-enterprise;https://registry.ionicframework.com/"
+      ]
+    }
   },
-  "type": "react-vite"
+  "type": "react"
 }
