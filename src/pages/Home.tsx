@@ -44,7 +44,7 @@ const Home: React.FC = () => {
     updateConfigState();
   }, [])
 
-  const updateConfigState = async () => {
+  const updateConfigState = async (): Promise<void> => {
     const config = await getConfig();
     setLiveUpdateConfig(config);
     setAppId(config?.appId || 'Not set');
@@ -55,21 +55,21 @@ const Home: React.FC = () => {
     setAppInfo(await App.getInfo());
   }
 
-  const handleSync = async () => {
+  const handleSync = async (): Promise<void> => {
     const resp = await sync((percentage: number) => {
       setDownloadProgress(percentage);
     })
     setSyncResp(resp);
   }
 
-  const handleConfigUpdate = async () => {
+  const handleConfigUpdate = async (): Promise<void> => {
     const normalizedStrategy = strategy === 'zip' || strategy === 'differential' ? strategy : undefined;
     await setConfig({ channel, appId, strategy: normalizedStrategy });
-    updateConfigState();
+    await updateConfigState();
     setToastOpen(true);
   }
 
-  const handleConfigReset = async () => {
+  const handleConfigReset = async (): Promise<void> => {
     await resetConfig();
     await updateConfigState();
   }
