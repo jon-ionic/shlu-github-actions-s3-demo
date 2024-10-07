@@ -1,6 +1,6 @@
-describe('My First Test', () => {
+describe('Confirm header renders', () => {
   it('Visits the app root url', () => {
     cy.visit('/')
-    cy.contains('#container', 'Ready to create an app?')
+    cy.contains('#demo-header', 'Demo')
   })
 })

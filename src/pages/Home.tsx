@@ -1,3 +1,4 @@
+import React from 'react';
 import { 
   IonContent, 
   IonHeader, 
@@ -32,9 +33,9 @@ const Home: React.FC = () => {
   const [channel, setChannel] = useState<string>('');
   const [appInfo, setAppInfo] = useState<AppInfo | undefined>(undefined);
   const [deviceInfo, setDeviceInfo] = useState<DeviceInfo | undefined>(undefined);
+  const [liveUpdateConfig, setLiveUpdateConfig] = useState<LiveUpdateConfig | undefined>(undefined);
   const [appId, setAppId] = useState<string>('');
   const [strategy, setStrategy] = useState<string>('');
-  const [liveUpdateConfig, setLiveUpdateConfig] = useState<LiveUpdateConfig>({ appId: 'Not set', channel: 'Not set'});
   const [downloadProgress, setDownloadProgress] = useState<number>(0);
   const [syncResp, setSyncResp] = useState<SyncResult | null>(null);
   const [toastOpen, setToastOpen] = useState<boolean>(false);
@@ -50,8 +51,8 @@ const Home: React.FC = () => {
     setChannel(config?.channel || 'Not set');
     setStrategy(config?.strategy || 'Not set');
 
-    setAppInfo(await App.getInfo());
     setDeviceInfo(await Device.getInfo());
+    setAppInfo(await App.getInfo());
   }
 
   const handleSync = async () => {
@@ -73,9 +74,10 @@ const Home: React.FC = () => {
     await updateConfigState();
   }
 
-  const bytesToHumanReadableSize = (bytes: number) => {
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-    if (bytes === 0) return 'n/a';
+  const bytesToHumanReadableSize = (bytes: number | undefined): string => {
+    if (bytes === 0) return '0 bytes';
+    if (!bytes) return 'n/a';
+    const sizes = ['bytes', 'KB', 'MB', 'GB', 'TB'];
     const i = Math.floor(Math.log(bytes) / Math.log(1024));
     if (i === 0) return `${bytes} ${sizes[i]})`;
     return `${(bytes / (1024 ** i)).toFixed(1)} ${sizes[i]}`;
@@ -93,7 +95,7 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle size="large">Demo {packageJsonVersion}</IonTitle>
+          <IonTitle size="large" id="demo-header">Demo {packageJsonVersion}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
