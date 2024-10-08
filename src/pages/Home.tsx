@@ -13,6 +13,7 @@ import {
   IonToast,
   IonText,
   IonInput,
+  ToastOptions,
 } from '@ionic/react';
 import { 
   sync, 
@@ -29,6 +30,12 @@ import { useState, useEffect } from 'react';
 import packageJson from '../../package.json';
 import './Home.css';
 
+interface Toast {
+  open: boolean
+  text: string
+  color: ToastOptions['color']
+}
+
 const Home: React.FC = () => {
   const [channel, setChannel] = useState<string>('');
   const [appInfo, setAppInfo] = useState<AppInfo | undefined>(undefined);
@@ -39,6 +46,7 @@ const Home: React.FC = () => {
   const [downloadProgress, setDownloadProgress] = useState<number>(0);
   const [syncResp, setSyncResp] = useState<SyncResult | null>(null);
   const [toastOpen, setToastOpen] = useState<boolean>(false);
+  const [toast, setToast] = useState<Toast>({ open: false, text: '', color: 'primary' })
 
   useEffect(() => {
     updateConfigState();
@@ -63,10 +71,23 @@ const Home: React.FC = () => {
   }
 
   const handleConfigUpdate = async (): Promise<void> => {
+    if (strategy !== 'zip' && strategy !== 'differential') {
+      setToast({
+        open: true,
+        text: 'Strategy must be "zip" or "differential"',
+        color: 'danger',
+      });
+      return;
+    }
+
     const normalizedStrategy = strategy === 'zip' || strategy === 'differential' ? strategy : undefined;
     await setConfig({ channel, appId, strategy: normalizedStrategy });
     await updateConfigState();
-    setToastOpen(true);
+    setToast({
+      open: true,
+      text: 'Updated live update config successfully',
+      color: 'success',
+    });
   }
 
   const handleConfigReset = async (): Promise<void> => {
@@ -214,10 +235,11 @@ const Home: React.FC = () => {
       </IonContent>
       
       <IonToast
-        isOpen={toastOpen}
-        message='Live update config set successfully.'
-        onDidDismiss={() => setToastOpen(false)}
+        isOpen={toast.open}
+        message={toast.text}
+        onDidDismiss={() => setToast({ open: false, text: '', color: 'primary' })}
         duration={5000}
+        color={toast.color}
       ></IonToast>
     </IonPage>
   );
