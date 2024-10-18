@@ -31,3 +31,6 @@ dist
 
 ionic_cloud_private.pem
 dist2
+
+cypress/screenshots
+cypress/videos
