@@ -56,7 +56,9 @@ const Home: React.FC = () => {
 
   const performAutomaticSync = async (): Promise<void> => {
     const result = await sync();
-    localStorage.updateJustDownloaded = result.activeApplicationPathChanged;
+    if (result.activeApplicationPathChanged === true) {
+      localStorage.updateJustDownloaded = 'true';
+    }
     localStorage.shouldReloadApp = result.activeApplicationPathChanged;
   }
 
