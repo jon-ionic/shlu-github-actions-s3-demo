@@ -79,6 +79,10 @@ const Home: React.FC = () => {
         await performAutomaticSync();
       }
     });
+
+    if (localStorage.updateJustDownloaded === 'true') {
+      setUpdateAlertOpen(true)
+    }
     
     await performAutomaticSync();
   }
