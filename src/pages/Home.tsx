@@ -45,7 +45,6 @@ const Home: React.FC = () => {
   const [strategy, setStrategy] = useState<string>('');
   const [downloadProgress, setDownloadProgress] = useState<number>(0);
   const [syncResp, setSyncResp] = useState<SyncResult | null>(null);
-  const [toastOpen, setToastOpen] = useState<boolean>(false);
   const [toast, setToast] = useState<Toast>({ open: false, text: '', color: 'primary' })
 
   useEffect(() => {
@@ -95,7 +94,7 @@ const Home: React.FC = () => {
     await updateConfigState();
   }
 
-  const bytesToHumanReadableSize = (bytes: number | undefined): string => {
+  const convertBytes = (bytes: number | undefined): string => {
     if (bytes === 0) return '0 bytes';
     if (!bytes) return 'n/a';
     const sizes = ['bytes', 'KB', 'MB', 'GB', 'TB'];
@@ -145,7 +144,7 @@ const Home: React.FC = () => {
               <IonText><h2><b>Android SDK version:</b> {deviceInfo?.androidSDKVersion || 'Not set'}</h2></IonText>
             )}
             {['ios', 'android'].includes(deviceInfo?.platform || '') && (
-              <IonText><h2><b>Free space:</b> {bytesToHumanReadableSize(deviceInfo?.realDiskFree || 0) || 'Not set'}</h2></IonText>
+              <IonText><h2><b>Free space:</b> {convertBytes(deviceInfo?.realDiskFree)}</h2></IonText>
             )}
           </IonCardContent>
         </IonCard>
@@ -200,9 +199,19 @@ const Home: React.FC = () => {
                 {Math.round(downloadProgress * 100)}% downloaded.
               </IonText>
             )}
-            {(syncResp?.liveUpdate?.channel && syncResp?.snapshot?.buildId) && (
+            {(syncResp?.activeApplicationPathChanged && syncResp?.snapshot?.buildId) && (
               <IonText>
                 Downloaded build id {syncResp?.snapshot?.buildId} from {syncResp?.liveUpdate?.channel} channel.
+              </IonText>
+            )}
+            {(!syncResp?.activeApplicationPathChanged && syncResp?.snapshot?.buildId && syncResp?.source === 'cache') && (
+              <IonText>
+                Pulled build id {syncResp?.snapshot?.buildId} from cache.
+              </IonText>
+            )}
+            {(syncResp?.activeApplicationPathChanged === false && !syncResp?.snapshot?.buildId) && (
+              <IonText>
+                No live update available on the {syncResp?.liveUpdate?.channel} channel.
               </IonText>
             )}
             {syncResp && (
