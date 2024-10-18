@@ -54,24 +54,31 @@ const Home: React.FC = () => {
     updateConfigState();
   }, [])
 
+  const performAutomaticSync = async (): Promise<void> => {
+    const result = await sync();
+    localStorage.updateJustDownloaded = result.activeApplicationPathChanged;
+    localStorage.shouldReloadApp = result.activeApplicationPathChanged;
+  }
+
+  const dismissUpdateAlert = (): void => {
+    localStorage.updateJustDownloaded = 'false';
+    setUpdateAlertOpen(false);
+  }
+
   const checkForUpdate = async (): Promise<void> => {
     App.addListener('resume', async () => {
       if (localStorage.updateJustDownloaded === 'true') {
         setUpdateAlertOpen(true)
       }
       if (localStorage.shouldReloadApp === 'true') {
-        localStorage.updateJustDownloaded === 'true';
         await reload();
       }
       else {
-        const result = await sync();
-        localStorage.shouldReloadApp = result.activeApplicationPathChanged;
+        await performAutomaticSync();
       }
     });
     
-    // First sync on app load
-    const result = await sync();
-    localStorage.shouldReloadApp = result.activeApplicationPathChanged;
+    await performAutomaticSync();
   }
 
   const updateConfigState = async (): Promise<void> => {
@@ -281,9 +288,9 @@ const Home: React.FC = () => {
         buttons={[{
           text: 'OK',
           role: 'confirm',
-          handler: () => setUpdateAlertOpen(false)
+          handler: () => dismissUpdateAlert()
         }]}
-        onDidDismiss={() => setUpdateAlertOpen(false)}
+        onDidDismiss={() => dismissUpdateAlert()}
       ></IonAlert>
     </IonPage>
   );
