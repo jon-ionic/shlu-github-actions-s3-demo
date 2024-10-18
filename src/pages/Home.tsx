@@ -14,6 +14,7 @@ import {
   IonText,
   IonInput,
   ToastOptions,
+  IonAlert,
 } from '@ionic/react';
 import { 
   sync, 
@@ -45,11 +46,33 @@ const Home: React.FC = () => {
   const [strategy, setStrategy] = useState<string>('');
   const [downloadProgress, setDownloadProgress] = useState<number>(0);
   const [syncResp, setSyncResp] = useState<SyncResult | null>(null);
-  const [toast, setToast] = useState<Toast>({ open: false, text: '', color: 'primary' })
+  const [toast, setToast] = useState<Toast>({ open: false, text: '', color: 'primary' });
+  const [updateAlertOpen, setUpdateAlertOpen] = useState<boolean>(false);
 
   useEffect(() => {
+    checkForUpdate();
     updateConfigState();
   }, [])
+
+  const checkForUpdate = async (): Promise<void> => {
+    App.addListener('resume', async () => {
+      if (localStorage.updateJustDownloaded === 'true') {
+        setUpdateAlertOpen(true)
+      }
+      if (localStorage.shouldReloadApp === 'true') {
+        localStorage.updateJustDownloaded === 'true';
+        await reload();
+      }
+      else {
+        const result = await sync();
+        localStorage.shouldReloadApp = result.activeApplicationPathChanged;
+      }
+    });
+    
+    // First sync on app load
+    const result = await sync();
+    localStorage.shouldReloadApp = result.activeApplicationPathChanged;
+  }
 
   const updateConfigState = async (): Promise<void> => {
     const config = await getConfig();
@@ -250,6 +273,18 @@ const Home: React.FC = () => {
         duration={5000}
         color={toast.color}
       ></IonToast>
+      <IonAlert
+        trigger="present-alert"
+        header="Update applied!"
+        message="An update was just applied."
+        isOpen={updateAlertOpen}
+        buttons={[{
+          text: 'OK',
+          role: 'confirm',
+          handler: () => setUpdateAlertOpen(false)
+        }]}
+        onDidDismiss={() => setUpdateAlertOpen(false)}
+      ></IonAlert>
     </IonPage>
   );
 };
