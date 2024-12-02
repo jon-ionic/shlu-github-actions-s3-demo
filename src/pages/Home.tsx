@@ -50,7 +50,6 @@ const Home: React.FC = () => {
   const [updateAlertOpen, setUpdateAlertOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    checkForUpdate();
     updateConfigState();
   }, [])
 
