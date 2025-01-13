@@ -1,19 +1,18 @@
-name: Deploy Self-Hosted Live Update
+name: Deploy self-hosted live update
 
 on:
   push:
     branches:
     - main
     - 'update/**'
-    - 'auto-deploy'
 
 jobs:
-  LiveUpdate-Deploy:
+  deploy_shlu:
     runs-on: ubuntu-latest
 
     env:
       IONIC_TOKEN: ${{ secrets.IONIC_TOKEN }}
-      APP_ID: '42f81456'
+      APP_ID: 42f81456
     
     steps:
     - name: Install Ionic Cloud CLI
@@ -39,14 +38,14 @@ jobs:
         --build-dir=dist \
         --signing-key="${{ secrets.IONIC_PRIVATE_KEY }}"
       
-    - name: Configure AWS credentials
+    - name: Configure AWS CLI
       uses: aws-actions/configure-aws-credentials@v2
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2
         
-    - name: Copy bundle to AWS
+    - name: Copy bundle files to AWS
       run: |
         aws s3 sync dist s3://shlu-github-actions-s3-demo/$GITHUB_SHA --acl public-read
 

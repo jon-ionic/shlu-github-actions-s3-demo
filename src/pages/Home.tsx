@@ -53,20 +53,19 @@ const Home: React.FC = () => {
     updateConfigState();
   }, [])
 
-  const performAutomaticSync = async (): Promise<void> => {
-    const result = await sync();
-    if (result.activeApplicationPathChanged === true) {
-      localStorage.updateJustDownloaded = 'true';
+  const checkForUpdateOnResume = async (): Promise<void> => {
+    /* 
+    Example function that automatically downloads and applies a live update on app resume.
+    Add to useEffect to automatically trigger on resume.
+    */
+    const performAutomaticSync = async (): Promise<void> => {
+      const result = await sync();
+      if (result.activeApplicationPathChanged === true) {
+        localStorage.updateJustDownloaded = 'true';
+      }
+      localStorage.shouldReloadApp = result.activeApplicationPathChanged;
     }
-    localStorage.shouldReloadApp = result.activeApplicationPathChanged;
-  }
 
-  const dismissUpdateAlert = (): void => {
-    localStorage.updateJustDownloaded = 'false';
-    setUpdateAlertOpen(false);
-  }
-
-  const checkForUpdate = async (): Promise<void> => {
     App.addListener('resume', async () => {
       if (localStorage.updateJustDownloaded === 'true') {
         setUpdateAlertOpen(true)
@@ -86,12 +85,21 @@ const Home: React.FC = () => {
     await performAutomaticSync();
   }
 
+  const dismissUpdateAlert = (): void => {
+    localStorage.updateJustDownloaded = 'false';
+    setUpdateAlertOpen(false);
+  }
+
   const updateConfigState = async (): Promise<void> => {
+    /*
+    Fetches the plugin values from the live update config and applies them to state.
+    Gets run on startup and after updating/resetting the config.
+    */
     const config = await getConfig();
     setLiveUpdateConfig(config);
     setAppId(config?.appId || 'Not set');
     setChannel(config?.channel || 'Not set');
-    setStrategy(config?.strategy || 'Not set');
+    setStrategy(config?.strategy?.toLowerCase() || 'Not set');
 
     setDeviceInfo(await Device.getInfo());
     setAppInfo(await App.getInfo());
@@ -105,6 +113,9 @@ const Home: React.FC = () => {
   }
 
   const handleConfigUpdate = async (): Promise<void> => {
+    /*
+    Validate and save live update configuration.
+    */
     if (strategy !== 'zip' && strategy !== 'differential') {
       setToast({
         open: true,
