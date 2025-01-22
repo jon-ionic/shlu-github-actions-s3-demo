@@ -12,9 +12,9 @@ const config: CapacitorConfig = {
       appId: '42f81456',
       channel: 'dev-0.0.1',
       autoUpdateMethod: 'background',
-      // maxVersions: 2,
-      // strategy: 'differential',
-      // key: 'ionic_cloud_public.pem',
+      maxVersions: 2,
+      strategy: 'differential',
+      key: 'ionic_cloud_public.pem',
     },
   }
 };
