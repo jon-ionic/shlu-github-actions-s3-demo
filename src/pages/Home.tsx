@@ -189,9 +189,6 @@ const Home: React.FC = () => {
             {deviceInfo?.platform === 'android' && (
               <IonText><h2><b>Android SDK version:</b> {deviceInfo?.androidSDKVersion || 'Not set'}</h2></IonText>
             )}
-            {['ios', 'android'].includes(deviceInfo?.platform || '') && (
-              <IonText><h2><b>Free space:</b> {convertBytes(deviceInfo?.realDiskFree)}</h2></IonText>
-            )}
           </IonCardContent>
         </IonCard>
 

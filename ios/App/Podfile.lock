@@ -1,23 +1,23 @@
 PODS:
-  - Capacitor (6.1.1):
+  - Capacitor (7.0.1):
     - CapacitorCordova
-  - CapacitorApp (6.0.0):
+  - CapacitorApp (7.0.0):
     - Capacitor
-  - CapacitorCordova (6.1.1)
-  - CapacitorDevice (6.0.1):
+  - CapacitorCordova (7.0.1)
+  - CapacitorDevice (7.0.0):
     - Capacitor
-  - CapacitorHaptics (6.0.0):
+  - CapacitorHaptics (7.0.0):
     - Capacitor
-  - CapacitorKeyboard (6.0.1):
+  - CapacitorKeyboard (7.0.0):
     - Capacitor
-  - CapacitorLiveUpdates (0.3.1):
+  - CapacitorLiveUpdates (0.4.0):
     - Capacitor
-    - IonicLiveUpdates (~> 0.5.4)
-  - CapacitorSplashScreen (6.0.2):
+    - IonicLiveUpdates (~> 0.5.6)
+  - CapacitorSplashScreen (7.0.0):
     - Capacitor
-  - CapacitorStatusBar (6.0.0):
+  - CapacitorStatusBar (7.0.0):
     - Capacitor
-  - IonicLiveUpdates (0.5.5)
+  - IonicLiveUpdates (0.5.6)
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
@@ -55,17 +55,17 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/status-bar"
 
 SPEC CHECKSUMS:
-  Capacitor: 8941aba4364ba9d1b22188569001f2ce45cc2b00
-  CapacitorApp: 9d53aec7101f7b030a950c5bdc4df8612576b279
-  CapacitorCordova: 8f2cc8d8d3619c566e9418fe8772064a94266106
-  CapacitorDevice: 7097a1deb4224b77fd13a6e60a355d0062a5d772
-  CapacitorHaptics: 9ebc9363f0e9b8eb4295088a0b474530acf1859b
-  CapacitorKeyboard: 5f32a712adf41e07a61caafb82cf29fb6d8ba123
-  CapacitorLiveUpdates: 82cf6e546e739075d805de2eef30df1caec1fbcd
-  CapacitorSplashScreen: 250df9ef8014fac5c7c1fd231f0f8b1d8f0b5624
-  CapacitorStatusBar: 2e4369f99166125435641b1908d05f561eaba6f6
-  IonicLiveUpdates: 656600ecd2cbaad5d5522aedd35958b9cf20b943
+  Capacitor: 23fff43571a4d1e3ee7d67b5a3588c6e757c2913
+  CapacitorApp: 45cb7cbef4aa380b9236fd6980033eb5cde6fcd2
+  CapacitorCordova: 63d476958d5022d76f197031e8b7ea3519988c64
+  CapacitorDevice: 62066b65e148a133df7b8c5bf972ba835b329748
+  CapacitorHaptics: 1fba3e460e7614349c6d5f868b1fccdc5c87b66d
+  CapacitorKeyboard: 2c26c6fccde35023c579fc37d4cae6326d5e6343
+  CapacitorLiveUpdates: 1f47570fe78d925bfe95ab7da1c6e706eb2d5471
+  CapacitorSplashScreen: f4e58cc02aafd91c7cbaf32a3d1b44d02a115125
+  CapacitorStatusBar: 438e90beeeefa8276b24e6c5991cb02dd13e51bf
+  IonicLiveUpdates: fbc64a7e9ce18a25b992200ec80ce37d5e6eb5aa
 
-PODFILE CHECKSUM: 5c74191c3f4a200b50abb218bf6412a804a5a02b
+PODFILE CHECKSUM: 80f0e15e03fcec2862229c4cb3739ef2c05d62c5
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2
