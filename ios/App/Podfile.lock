@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.9.1)
   - Capacitor (6.1.1):
     - CapacitorCordova
   - CapacitorApp (6.0.0):
@@ -10,14 +11,15 @@ PODS:
     - Capacitor
   - CapacitorKeyboard (6.0.1):
     - Capacitor
-  - CapacitorLiveUpdates (0.3.1):
-    - Capacitor
-    - IonicLiveUpdates (~> 0.5.4)
   - CapacitorSplashScreen (6.0.2):
     - Capacitor
   - CapacitorStatusBar (6.0.0):
     - Capacitor
-  - IonicLiveUpdates (0.5.5)
+  - CapawesomeCapacitorLiveUpdate (6.7.2):
+    - Alamofire (~> 5.9.0)
+    - Capacitor
+    - SSZipArchive (~> 2.2)
+  - SSZipArchive (2.4.3)
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
@@ -26,13 +28,14 @@ DEPENDENCIES:
   - "CapacitorDevice (from `../../node_modules/@capacitor/device`)"
   - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
   - "CapacitorKeyboard (from `../../node_modules/@capacitor/keyboard`)"
-  - "CapacitorLiveUpdates (from `../../node_modules/@capacitor/live-updates`)"
   - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
+  - "CapawesomeCapacitorLiveUpdate (from `../../node_modules/@capawesome/capacitor-live-update`)"
 
 SPEC REPOS:
   trunk:
-    - IonicLiveUpdates
+    - Alamofire
+    - SSZipArchive
 
 EXTERNAL SOURCES:
   Capacitor:
@@ -47,25 +50,26 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/haptics"
   CapacitorKeyboard:
     :path: "../../node_modules/@capacitor/keyboard"
-  CapacitorLiveUpdates:
-    :path: "../../node_modules/@capacitor/live-updates"
   CapacitorSplashScreen:
     :path: "../../node_modules/@capacitor/splash-screen"
   CapacitorStatusBar:
     :path: "../../node_modules/@capacitor/status-bar"
+  CapawesomeCapacitorLiveUpdate:
+    :path: "../../node_modules/@capawesome/capacitor-live-update"
 
 SPEC CHECKSUMS:
+  Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
   Capacitor: 8941aba4364ba9d1b22188569001f2ce45cc2b00
   CapacitorApp: 9d53aec7101f7b030a950c5bdc4df8612576b279
   CapacitorCordova: 8f2cc8d8d3619c566e9418fe8772064a94266106
   CapacitorDevice: 7097a1deb4224b77fd13a6e60a355d0062a5d772
   CapacitorHaptics: 9ebc9363f0e9b8eb4295088a0b474530acf1859b
   CapacitorKeyboard: 5f32a712adf41e07a61caafb82cf29fb6d8ba123
-  CapacitorLiveUpdates: 82cf6e546e739075d805de2eef30df1caec1fbcd
   CapacitorSplashScreen: 250df9ef8014fac5c7c1fd231f0f8b1d8f0b5624
   CapacitorStatusBar: 2e4369f99166125435641b1908d05f561eaba6f6
-  IonicLiveUpdates: 656600ecd2cbaad5d5522aedd35958b9cf20b943
+  CapawesomeCapacitorLiveUpdate: 4265db25ee75b7e71aa89cac744234800e477187
+  SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
 
-PODFILE CHECKSUM: 5c74191c3f4a200b50abb218bf6412a804a5a02b
+PODFILE CHECKSUM: ac732380405c79a0033fa55e4ec072af476f19f6
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

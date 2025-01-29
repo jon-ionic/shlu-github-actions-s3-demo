@@ -13,9 +13,9 @@ dependencies {
     implementation project(':capacitor-device')
     implementation project(':capacitor-haptics')
     implementation project(':capacitor-keyboard')
-    implementation project(':capacitor-live-updates')
     implementation project(':capacitor-splash-screen')
     implementation project(':capacitor-status-bar')
+    implementation project(':capawesome-capacitor-live-update')
 
 }
 
