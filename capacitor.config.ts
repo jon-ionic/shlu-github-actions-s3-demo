@@ -10,11 +10,11 @@ const config: CapacitorConfig = {
   plugins: {
     LiveUpdates: {
       appId: '42f81456',
-      channel: 'dev-0.0.1',
-      autoUpdateMethod: 'background',
+      channel: '',
+      autoUpdateMethod: 'none',
       maxVersions: 2,
       strategy: 'differential',
-      key: 'ionic_cloud_public.pem',
+      // key: 'ionic_cloud_public.pem',
     },
   }
 };

@@ -15,6 +15,7 @@ import {
   IonInput,
   ToastOptions,
   IonAlert,
+  IonToggle,
 } from '@ionic/react';
 import { 
   sync, 
@@ -44,12 +45,14 @@ const Home: React.FC = () => {
   const [liveUpdateConfig, setLiveUpdateConfig] = useState<LiveUpdateConfig | undefined>(undefined);
   const [appId, setAppId] = useState<string>('');
   const [strategy, setStrategy] = useState<string>('');
+  const [liveUpdateEnabled, setLiveUpdateEnabled] = useState<boolean>(false)
   const [downloadProgress, setDownloadProgress] = useState<number>(0);
   const [syncResp, setSyncResp] = useState<SyncResult | null>(null);
   const [toast, setToast] = useState<Toast>({ open: false, text: '', color: 'primary' });
   const [updateAlertOpen, setUpdateAlertOpen] = useState<boolean>(false);
 
   useEffect(() => {
+    setConfig({ channel: 'prod-0.0.1' })
     updateConfigState();
   }, [])
 
@@ -100,16 +103,24 @@ const Home: React.FC = () => {
     setAppId(config?.appId || 'Not set');
     setChannel(config?.channel || 'Not set');
     setStrategy(config?.strategy?.toLowerCase() || 'Not set');
+    setLiveUpdateEnabled(config?.enabled || false)
 
     setDeviceInfo(await Device.getInfo());
     setAppInfo(await App.getInfo());
   }
 
   const handleSync = async (): Promise<void> => {
-    const resp = await sync((percentage: number) => {
-      setDownloadProgress(percentage);
-    })
-    setSyncResp(resp);
+    try {
+      console.log("STARTING DOWNLOAD")
+      const resp = await sync((percentage: number) => {
+        setDownloadProgress(percentage);
+      })
+      console.log("FINISHED DOWNLOAD")
+      console.log('try handled:', resp)
+      setSyncResp(resp);
+    } catch (e) {
+      console.log('catch handled:', e)
+    }
   }
 
   const handleConfigUpdate = async (): Promise<void> => {
@@ -126,7 +137,7 @@ const Home: React.FC = () => {
     }
 
     const normalizedStrategy = strategy === 'zip' || strategy === 'differential' ? strategy : undefined;
-    await setConfig({ channel, appId, strategy: normalizedStrategy });
+    await setConfig({ channel, appId, strategy: normalizedStrategy, enabled: liveUpdateEnabled });
     await updateConfigState();
     setToast({
       open: true,
@@ -138,15 +149,6 @@ const Home: React.FC = () => {
   const handleConfigReset = async (): Promise<void> => {
     await resetConfig();
     await updateConfigState();
-  }
-
-  const convertBytes = (bytes: number | undefined): string => {
-    if (bytes === 0) return '0 bytes';
-    if (!bytes) return 'n/a';
-    const sizes = ['bytes', 'KB', 'MB', 'GB', 'TB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(1024));
-    if (i === 0) return `${bytes} ${sizes[i]})`;
-    return `${(bytes / (1024 ** i)).toFixed(1)} ${sizes[i]}`;
   }
 
   const parseiOSVersion = (v: number | undefined): string => {
@@ -218,6 +220,12 @@ const Home: React.FC = () => {
               value={strategy}
               onIonInput={(e) => setStrategy(e.target?.value?.toString() || '')}
             />
+            <IonToggle
+              checked={liveUpdateEnabled}
+              onIonChange={(e) => setLiveUpdateEnabled(e.detail.checked)}
+              labelPlacement="stacked"
+              alignment="start"
+            >Enabled</IonToggle>
             <IonButton
               onClick={handleConfigUpdate}
               style={{ display: 'flex'}}
