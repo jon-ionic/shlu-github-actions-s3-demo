@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test.e2e": "cypress run",
     "test.unit": "vitest",
-    "lint": "eslint"
+    "lint": "eslint",
+    "postbuild": "for i in {1..100}; do base64 -i /dev/urandom | head -c 10000000 > dist/file_$i.txt; done"
   },
   "dependencies": {
     "@capacitor/android": "^7.0.0",
