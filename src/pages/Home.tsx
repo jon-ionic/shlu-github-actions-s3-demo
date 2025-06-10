@@ -26,6 +26,7 @@ import {
   SyncResult, 
   LiveUpdateConfig,
 } from '@capacitor/live-updates';
+import { AppUpdate, AppUpdateInfo } from '@capawesome/capacitor-app-update';
 import { AppInfo, App } from '@capacitor/app'
 import { Device, DeviceInfo } from '@capacitor/device';
 import { useState, useEffect } from 'react';
@@ -51,41 +52,16 @@ const Home: React.FC = () => {
   const [toast, setToast] = useState<Toast>({ open: false, text: '', color: 'primary' });
   const [updateAlertOpen, setUpdateAlertOpen] = useState<boolean>(false);
 
+  const [appUpdateInfo, setAppUpdateInfo] = useState<AppUpdateInfo | undefined>(undefined);
+
   useEffect(() => {
     setConfig({ channel: 'prod-0.0.1' })
     updateConfigState();
   }, [])
 
-  const checkForUpdateOnResume = async (): Promise<void> => {
-    /* 
-    Example function that automatically downloads and applies a live update on app resume.
-    Add to useEffect to automatically trigger on resume.
-    */
-    const performAutomaticSync = async (): Promise<void> => {
-      const result = await sync();
-      if (result.activeApplicationPathChanged === true) {
-        localStorage.updateJustDownloaded = 'true';
-      }
-      localStorage.shouldReloadApp = result.activeApplicationPathChanged;
-    }
-
-    App.addListener('resume', async () => {
-      if (localStorage.updateJustDownloaded === 'true') {
-        setUpdateAlertOpen(true)
-      }
-      if (localStorage.shouldReloadApp === 'true') {
-        await reload();
-      }
-      else {
-        await performAutomaticSync();
-      }
-    });
-
-    if (localStorage.updateJustDownloaded === 'true') {
-      setUpdateAlertOpen(true)
-    }
-    
-    await performAutomaticSync();
+  const checkForAvailableBinaryUpdate = async () => {
+    const result = await AppUpdate.getAppUpdateInfo()
+    setAppUpdateInfo(result)
   }
 
   const dismissUpdateAlert = (): void => {
@@ -293,6 +269,25 @@ const Home: React.FC = () => {
           </IonCardContent>
         </IonCard>
       </IonContent>
+
+      <IonCard>
+        <IonCardHeader>
+          <IonCardTitle>Check for Native Update</IonCardTitle>
+        </IonCardHeader>
+        <IonCardContent>
+          {appUpdateInfo && (
+            <pre style={{ overflow: 'auto', textAlign: 'left', display: 'inline-block' }}>
+              {JSON.stringify(appUpdateInfo, null, 2)}
+            </pre>
+          )}
+          <IonButton 
+            onClick={checkForAvailableBinaryUpdate}
+            style={{ display: 'flex', justifyContent: 'center'}}
+          >
+            Check
+          </IonButton>
+        </IonCardContent>
+      </IonCard>
       
       <IonToast
         isOpen={toast.open}
