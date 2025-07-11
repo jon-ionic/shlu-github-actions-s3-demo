@@ -10,13 +10,13 @@ PODS:
     - Capacitor
   - CapacitorKeyboard (7.0.0):
     - Capacitor
-  - CapacitorLiveUpdates (0.4.0):
-    - Capacitor
-    - IonicLiveUpdates (~> 0.5.6)
   - CapacitorSplashScreen (7.0.0):
     - Capacitor
   - CapacitorStatusBar (7.0.0):
     - Capacitor
+  - IonicEnterpriseFederatedCapacitor (0.3.0):
+    - Capacitor
+    - IonicLiveUpdates (~> 0.5.6)
   - IonicLiveUpdates (0.5.6)
 
 DEPENDENCIES:
@@ -26,9 +26,9 @@ DEPENDENCIES:
   - "CapacitorDevice (from `../../node_modules/@capacitor/device`)"
   - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
   - "CapacitorKeyboard (from `../../node_modules/@capacitor/keyboard`)"
-  - "CapacitorLiveUpdates (from `../../node_modules/@capacitor/live-updates`)"
   - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
+  - "IonicEnterpriseFederatedCapacitor (from `../../node_modules/@ionic-enterprise/federated-capacitor`)"
 
 SPEC REPOS:
   trunk:
@@ -47,12 +47,12 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/haptics"
   CapacitorKeyboard:
     :path: "../../node_modules/@capacitor/keyboard"
-  CapacitorLiveUpdates:
-    :path: "../../node_modules/@capacitor/live-updates"
   CapacitorSplashScreen:
     :path: "../../node_modules/@capacitor/splash-screen"
   CapacitorStatusBar:
     :path: "../../node_modules/@capacitor/status-bar"
+  IonicEnterpriseFederatedCapacitor:
+    :path: "../../node_modules/@ionic-enterprise/federated-capacitor"
 
 SPEC CHECKSUMS:
   Capacitor: 23fff43571a4d1e3ee7d67b5a3588c6e757c2913
@@ -61,11 +61,11 @@ SPEC CHECKSUMS:
   CapacitorDevice: 62066b65e148a133df7b8c5bf972ba835b329748
   CapacitorHaptics: 1fba3e460e7614349c6d5f868b1fccdc5c87b66d
   CapacitorKeyboard: 2c26c6fccde35023c579fc37d4cae6326d5e6343
-  CapacitorLiveUpdates: 1f47570fe78d925bfe95ab7da1c6e706eb2d5471
   CapacitorSplashScreen: f4e58cc02aafd91c7cbaf32a3d1b44d02a115125
   CapacitorStatusBar: 438e90beeeefa8276b24e6c5991cb02dd13e51bf
+  IonicEnterpriseFederatedCapacitor: 707ee0fe6a9996b1abc59541106a41bfe57719aa
   IonicLiveUpdates: fbc64a7e9ce18a25b992200ec80ce37d5e6eb5aa
 
-PODFILE CHECKSUM: 80f0e15e03fcec2862229c4cb3739ef2c05d62c5
+PODFILE CHECKSUM: 3d06389fe3e3f6c8213bdc17cac1aea47f695bde
 
 COCOAPODS: 1.16.2

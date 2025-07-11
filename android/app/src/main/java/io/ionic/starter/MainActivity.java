@@ -1,5 +1,5 @@
 package io.ionic.starter;
 
-import com.getcapacitor.BridgeActivity;
+import com.capacitorjs.federated.FederatedCapacitorBridgeActivity;
 
-public class MainActivity extends BridgeActivity {}
+public class MainActivity extends FederatedCapacitorBridgeActivity {}

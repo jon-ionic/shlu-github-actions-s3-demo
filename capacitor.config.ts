@@ -8,14 +8,31 @@ const config: CapacitorConfig = {
     androidScheme: 'https'
   },
   plugins: {
-    LiveUpdates: {
-      appId: '42f81456',
-      channel: '',
-      autoUpdateMethod: 'none',
-      maxVersions: 2,
-      strategy: 'differential',
-      // key: 'ionic_cloud_public.pem',
-    },
+    FederatedCapacitor: {
+      shell: {
+        name: 'shell'
+      },
+      apps: [
+        {
+          name: 'one',
+          webDir: './web/one/dist',
+          liveUpdateConfig: {
+            appId: 'asdgdagrdfa',
+            channel: 'production',
+            autoUpdateMethod: 'none',
+          }
+        },
+        {
+          name: 'two',
+          webDir: './web/two/dist',
+          liveUpdateConfig: {
+            appId: 'df240a48',
+            channel: 'production',
+            autoUpdateMethod: 'none'
+          }
+        }
+      ]
+    } 
   }
 };
 
