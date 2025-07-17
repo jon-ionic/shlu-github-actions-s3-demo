@@ -24,23 +24,17 @@ const Home: React.FC = () => {
   const [syncComplete, setSyncComplete] = useState<boolean>(false);
 
   const handleSync = async (): Promise<void> => {
-    try {
-      console.log("STARTING DOWNLOAD")
-      syncAll({
-        onAppComplete: (result: SyncResult) => {
-          setSyncResults([...syncResults, result]);
-        },
-        onSyncComplete: () => {
-          setSyncComplete(true);
-        },
-        onError: (error: LiveUpdateError) => {
-          setSyncErrors([...syncErrors, error]);
-        }
-      })
-      console.log("FINISHED DOWNLOAD")
-    } catch (e) {
-      console.log('catch handled:', e)
-    }
+    syncAll({
+      onAppComplete: (result: SyncResult) => {
+        setSyncResults([...syncResults, result]);
+      },
+      onSyncComplete: () => {
+        setSyncComplete(true);
+      },
+      onError: (error: LiveUpdateError) => {
+        setSyncErrors([...syncErrors, error]);
+      }
+    });
   }
   const packageJsonVersion = packageJson.version;
 
@@ -48,7 +42,7 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle size="large" id="demo-header">Demo {packageJsonVersion}</IonTitle>
+          <IonTitle size="large" id="demo-header">Fedcap Demo {packageJsonVersion}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
