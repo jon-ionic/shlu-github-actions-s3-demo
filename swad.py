@@ -4,10 +4,11 @@ import zipfile
 import os
 import sys
 
+APPFLOW_CLI = "/usr/local/bin/appflow-cli"
 
 def test_appflow_cli():
     try:
-        subprocess.check_output(["appflow", "--version"])
+        subprocess.check_output([APPFLOW_CLI, "--version"])
     except FileNotFoundError:
         print("Appflow CLI not installed on PATH.")
         sys.exit(1)
@@ -32,7 +33,7 @@ def download_mfe(mfe):
     print(f"Downloading artifact for app id: {app_id}")
 
     output = subprocess.check_output([
-        "appflow",
+        APPFLOW_CLI,
         "live-update",
         "download",
         f"--app-id={app_id}",
