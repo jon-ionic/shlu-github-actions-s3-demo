@@ -1,5 +1,5 @@
-echo "Installing Appflow CLI"
-curl -fsSL https://ionic.io/get-appflow-cli | bash
+# echo "Installing Appflow CLI"
+# curl -fsSL https://ionic.io/get-appflow-cli | bash
 
 # echo "Running swad script"
 # python3 swad.py

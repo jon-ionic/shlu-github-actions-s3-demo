@@ -3,7 +3,7 @@
         {
             "appId": "42f81456",
             "root": ".",
-            "webBuildCommand": "npm run build"
+            "webBuildCommand": "chmod +x ./build.sh && ./build.sh"
         }
     ]
 }
