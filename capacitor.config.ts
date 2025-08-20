@@ -17,8 +17,8 @@ const config: CapacitorConfig = {
           name: 'one',
           webDir: './web/one/dist',
           liveUpdateConfig: {
-            appId: 'asdgdagrdfa',
-            channel: 'production',
+            appId: '42f81456',
+            channel: 'dev-0.0.1',
             autoUpdateMethod: 'none',
           }
         },
@@ -26,7 +26,7 @@ const config: CapacitorConfig = {
           name: 'two',
           webDir: './web/two/dist',
           liveUpdateConfig: {
-            appId: 'df240a48',
+            appId: '7beb099c',
             channel: 'production',
             autoUpdateMethod: 'none'
           }
