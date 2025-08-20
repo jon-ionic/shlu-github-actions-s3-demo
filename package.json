@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "postbuild": "python3 swad.py",
+    "postbuild": "bash postbuild.sh",
     "preview": "vite preview",
     "test.e2e": "cypress run",
     "test.unit": "vitest",
