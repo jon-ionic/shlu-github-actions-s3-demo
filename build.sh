@@ -1,9 +1,9 @@
 echo "Installing Appflow CLI"
 curl -fsSL https://ionic.io/get-appflow-cli | bash
 
-echo "Running swad script"
-python3 swad.py
-echo "Script executed successfully."
+# echo "Running swad script"
+# python3 swad.py
+# echo "Script executed successfully."
 
 echo "Running build script"
 npm run build
