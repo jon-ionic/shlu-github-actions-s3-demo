@@ -1,0 +1,9 @@
+{
+    "apps": [
+        {
+            "appId": "42f81456",
+            "root": ".",
+            "webBuildCommand": "chmod +x ./build.sh && ./build.sh"
+        }
+    ]
+}

@@ -4,7 +4,7 @@ import zipfile
 import os
 import sys
 
-APPFLOW_CLI = "/usr/local/bin/appflow-cli"
+APPFLOW_CLI = "appflow"
 
 def test_appflow_cli():
     try:

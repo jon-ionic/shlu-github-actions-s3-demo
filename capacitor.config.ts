@@ -15,7 +15,7 @@ const config: CapacitorConfig = {
       apps: [
         {
           name: 'one',
-          webDir: './web/one/dist',
+          webDir: 'mfes/one',
           liveUpdateConfig: {
             appId: '42f81456',
             channel: 'dev-0.0.1',
@@ -24,7 +24,7 @@ const config: CapacitorConfig = {
         },
         {
           name: 'two',
-          webDir: './web/two/dist',
+          webDir: 'mfes/two',
           liveUpdateConfig: {
             appId: '7beb099c',
             channel: 'production',
