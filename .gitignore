@@ -36,3 +36,6 @@ cypress/screenshots
 cypress/videos
 
 web/
+mfes/
+.portals/
+.portals.yml

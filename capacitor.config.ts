@@ -10,27 +10,79 @@ const config: CapacitorConfig = {
   plugins: {
     FederatedCapacitor: {
       shell: {
-        name: 'shell'
+        name: 'shell',
       },
       apps: [
         {
-          name: 'one',
-          webDir: 'mfes/one',
+          name: 'host',
+          webDir: 'mfes/two',
           liveUpdateConfig: {
-            appId: '42f81456',
-            channel: 'dev-0.0.1',
+            appId: '3f567775',
+            channel: 'production',
             autoUpdateMethod: 'none',
+            strategy: 'differential',
           }
         },
         {
-          name: 'two',
+          name: 'funding',
+          webDir: 'mfes/one',
+          liveUpdateConfig: {
+            appId: '31384ca9',
+            channel: 'Test',
+            autoUpdateMethod: 'none',
+            strategy: 'differential',
+          }
+        },
+        {
+          name: 'copytrading',
           webDir: 'mfes/two',
           liveUpdateConfig: {
-            appId: '7beb099c',
-            channel: 'production',
-            autoUpdateMethod: 'none'
+            appId: '2cad9afe',
+            channel: 'Test',
+            autoUpdateMethod: 'none',
+            strategy: 'differential',
           }
-        }
+        },
+        {
+          name: 'ai',
+          webDir: 'mfes/one',
+          liveUpdateConfig: {
+            appId: '0aeaea87',
+            channel: 'Test',
+            autoUpdateMethod: 'none',
+            strategy: 'differential',
+          }
+        },
+        {
+          name: 'research',
+          webDir: 'mfes/two',
+          liveUpdateConfig: {
+            appId: '64ebe660',
+            channel: 'Test',
+            autoUpdateMethod: 'none',
+            strategy: 'differential',
+          }
+        },
+        {
+          name: 'education',
+          webDir: 'mfes/one',
+          liveUpdateConfig: {
+            appId: 'b2665ebf',
+            channel: 'Test',
+            autoUpdateMethod: 'none',
+            strategy: 'differential',
+          }
+        },
+        {
+          name: 'competitions',
+          webDir: 'mfes/two',
+          liveUpdateConfig: {
+            appId: '6c07a49a',
+            channel: 'Test',
+            autoUpdateMethod: 'none',
+            strategy: 'differential',
+          }
+        },
       ]
     } 
   }
