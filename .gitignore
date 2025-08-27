@@ -34,3 +34,5 @@ dist2
 
 cypress/screenshots
 cypress/videos
+
+web/
