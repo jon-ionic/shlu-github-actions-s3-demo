@@ -1,3 +1,30 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+
+        exclusiveContent {
+            forRepository {
+                maven {
+                    url "https://s3.amazonaws.com/salesforcesos.com/android/maven/release"
+                }
+            }
+            filter {
+                includeGroup "com.salesforce"
+            }
+        }
+    }
+}
+
 include ':app'
 include ':capacitor-cordova-android-plugins'
 project(':capacitor-cordova-android-plugins').projectDir = new File('./capacitor-cordova-android-plugins/')
