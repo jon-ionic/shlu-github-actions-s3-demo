@@ -11,16 +11,16 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+    }
 
-        exclusiveContent {
-            forRepository {
-                maven {
-                    url "https://s3.amazonaws.com/salesforcesos.com/android/maven/release"
-                }
+    exclusiveContent {
+        forRepository {
+            maven {
+                url "https://s3.amazonaws.com/salesforcesos.com/android/maven/release"
             }
-            filter {
-                includeGroup "com.salesforce"
-            }
+        }
+        filter {
+            includeGroup "com.salesforce"
         }
     }
 }
