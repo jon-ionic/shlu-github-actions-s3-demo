@@ -14,71 +14,21 @@ const config: CapacitorConfig = {
       },
       apps: [
         {
-          name: 'host',
-          webDir: 'mfes/two',
+          name: 'one',
+          webDir: 'mfes/one',
           liveUpdateConfig: {
-            appId: '3f567775',
+            appId: 'e42f72bb',
             channel: 'production',
             autoUpdateMethod: 'none',
             strategy: 'differential',
           }
         },
         {
-          name: 'funding',
-          webDir: 'mfes/one',
-          liveUpdateConfig: {
-            appId: '31384ca9',
-            channel: 'Test',
-            autoUpdateMethod: 'none',
-            strategy: 'differential',
-          }
-        },
-        {
-          name: 'copytrading',
+          name: 'two',
           webDir: 'mfes/two',
           liveUpdateConfig: {
-            appId: '2cad9afe',
-            channel: 'Test',
-            autoUpdateMethod: 'none',
-            strategy: 'differential',
-          }
-        },
-        {
-          name: 'ai',
-          webDir: 'mfes/one',
-          liveUpdateConfig: {
-            appId: '0aeaea87',
-            channel: 'Test',
-            autoUpdateMethod: 'none',
-            strategy: 'differential',
-          }
-        },
-        {
-          name: 'research',
-          webDir: 'mfes/two',
-          liveUpdateConfig: {
-            appId: '64ebe660',
-            channel: 'Test',
-            autoUpdateMethod: 'none',
-            strategy: 'differential',
-          }
-        },
-        {
-          name: 'education',
-          webDir: 'mfes/one',
-          liveUpdateConfig: {
-            appId: 'b2665ebf',
-            channel: 'Test',
-            autoUpdateMethod: 'none',
-            strategy: 'differential',
-          }
-        },
-        {
-          name: 'competitions',
-          webDir: 'mfes/two',
-          liveUpdateConfig: {
-            appId: '6c07a49a',
-            channel: 'Test',
+            appId: 'df240a48',
+            channel: 'productiopn',
             autoUpdateMethod: 'none',
             strategy: 'differential',
           }
