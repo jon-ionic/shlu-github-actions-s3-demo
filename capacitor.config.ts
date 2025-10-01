@@ -34,7 +34,7 @@ const config: CapacitorConfig = {
           webDir: 'mfes/two',
           liveUpdateConfig: {
             appId: 'df240a48',
-            channel: 'productiopn',
+            channel: 'production',
             autoUpdateMethod: 'none',
             strategy: 'differential',
           }

@@ -37,7 +37,7 @@ const Home: React.FC = () => {
     const results: SyncResult[] = [];
     const errors: LiveUpdateError[] = [];
 
-    await syncAll(), {
+    await syncAll({
       onAppComplete: (result: SyncResult) => {
         results.push(result);
         setSyncResults([...syncResults, result]);
