@@ -11,6 +11,12 @@ const config: CapacitorConfig = {
     FederatedCapacitor: {
       shell: {
         name: 'shell',
+        liveUpdateConfig: {
+          appId: "42f81456",
+          channel: "production",
+          autoUpdateMethod: "none",
+          strategy: "differential"
+        }
       },
       apps: [
         {

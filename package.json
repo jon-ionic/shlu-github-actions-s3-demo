@@ -1,7 +1,7 @@
 {
   "name": "shlu-github-actions-s3-demo",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.0-fedcap",
   "type": "module",
   "scripts": {
     "dev": "vite",
