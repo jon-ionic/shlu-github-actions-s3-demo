@@ -25,6 +25,7 @@ import {
   resetConfig, 
   SyncResult, 
   LiveUpdateConfig,
+  LiveUpdateError,
 } from '@capacitor/live-updates';
 import { AppInfo, App } from '@capacitor/app'
 import { Device, DeviceInfo } from '@capacitor/device';
@@ -48,6 +49,7 @@ const Home: React.FC = () => {
   const [liveUpdateEnabled, setLiveUpdateEnabled] = useState<boolean>(false)
   const [downloadProgress, setDownloadProgress] = useState<number>(0);
   const [syncResp, setSyncResp] = useState<SyncResult | null>(null);
+  const [syncError, setSyncError] = useState<LiveUpdateError | null>(null);
   const [toast, setToast] = useState<Toast>({ open: false, text: '', color: 'primary' });
   const [updateAlertOpen, setUpdateAlertOpen] = useState<boolean>(false);
 
@@ -56,7 +58,7 @@ const Home: React.FC = () => {
     updateConfigState();
   }, [])
 
-  const checkForUpdateOnResume = async (): Promise<void> => {
+ const checkForUpdateOnResume = async (): Promise<void> => {
     /* 
     Example function that automatically downloads and applies a live update on app resume.
     Add to useEffect to automatically trigger on resume.
@@ -111,15 +113,27 @@ const Home: React.FC = () => {
 
   const handleSync = async (): Promise<void> => {
     try {
-      console.log("STARTING DOWNLOAD")
+      console.log("STARTING DOWNLOAD");
+      setSyncError(null);
       const resp = await sync((percentage: number) => {
         setDownloadProgress(percentage);
       })
-      console.log("FINISHED DOWNLOAD")
-      console.log('try handled:', resp)
+      console.log("FINISHED DOWNLOAD");
+      console.log('try handled:', resp);
       setSyncResp(resp);
-    } catch (e) {
-      console.log('catch handled:', e)
+    } catch (e: unknown) {
+      function errorIsLiveUpdateError (e: any): e is LiveUpdateError {
+        return (
+          typeof e.appId === 'string' &&
+          e !== null &&
+          typeof e.message === 'string' &&
+          typeof e.failStep === 'string'
+        );
+      }
+
+      setSyncResp(null);
+      if (errorIsLiveUpdateError(e)) setSyncError(e);
+      console.log('catch handled:', e);
     }
   }
 
@@ -268,6 +282,11 @@ const Home: React.FC = () => {
             {syncResp && (
               <pre style={{ overflow: 'auto', textAlign: 'left', display: 'inline-block' }}>
                 {JSON.stringify(syncResp, null, 2)}
+              </pre>
+            )}
+            {syncError && (
+              <pre style={{ overflow: 'auto', textAlign: 'left', display: 'inline-block' }}>
+                {JSON.stringify(syncError, null, 2)}
               </pre>
             )}
             <IonButton 
