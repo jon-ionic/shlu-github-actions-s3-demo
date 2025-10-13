@@ -54,7 +54,7 @@ const Home: React.FC = () => {
   const [updateAlertOpen, setUpdateAlertOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    setConfig({ channel: 'prod-0.0.1' })
+    setConfig({ channel: 'dev-0.0.1' })
     updateConfigState();
   }, [])
 
