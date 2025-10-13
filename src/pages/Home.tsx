@@ -50,6 +50,7 @@ const Home: React.FC = () => {
   const [downloadProgress, setDownloadProgress] = useState<number>(0);
   const [syncResp, setSyncResp] = useState<SyncResult | null>(null);
   const [syncError, setSyncError] = useState<LiveUpdateError | null>(null);
+  const [downloadStarted, setDownloadStarted] = useState<boolean>(false);
   const [toast, setToast] = useState<Toast>({ open: false, text: '', color: 'primary' });
   const [updateAlertOpen, setUpdateAlertOpen] = useState<boolean>(false);
 
@@ -114,14 +115,18 @@ const Home: React.FC = () => {
   const handleSync = async (): Promise<void> => {
     try {
       console.log("STARTING DOWNLOAD");
+      setDownloadStarted(true);
       setSyncError(null);
       const resp = await sync((percentage: number) => {
+        console.log(percentage)
         setDownloadProgress(percentage);
       })
       console.log("FINISHED DOWNLOAD");
+      setDownloadStarted(false);
       console.log('try handled:', resp);
       setSyncResp(resp);
     } catch (e: unknown) {
+      setDownloadStarted(false);
       function errorIsLiveUpdateError (e: any): e is LiveUpdateError {
         return (
           typeof e.appId === 'string' &&
@@ -177,7 +182,7 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle size="large" id="demo-header">Demo {packageJsonVersion}</IonTitle>
+          <IonTitle size="large" id="demo-header">Big Live Update #2 - {packageJsonVersion}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
@@ -259,6 +264,11 @@ const Home: React.FC = () => {
             <IonCardTitle>Sync Live Update</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
+            {downloadStarted && (
+              <IonText>
+                Download in progress...
+              </IonText>
+            )}
             {(downloadProgress > 0 && downloadProgress < 1) && (
               <IonText>
                 {Math.round(downloadProgress * 100)}% downloaded.
