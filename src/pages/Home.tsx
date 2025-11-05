@@ -114,16 +114,14 @@ const Home: React.FC = () => {
 
   const handleSync = async (): Promise<void> => {
     try {
-      console.log("STARTING DOWNLOAD");
       setDownloadStarted(true);
       setSyncError(null);
       const resp = await sync((percentage: number) => {
         console.log(percentage)
         setDownloadProgress(percentage);
       })
-      console.log("FINISHED DOWNLOAD");
+      
       setDownloadStarted(false);
-      console.log('try handled:', resp);
       setSyncResp(resp);
     } catch (e: unknown) {
       setDownloadStarted(false);
@@ -138,7 +136,6 @@ const Home: React.FC = () => {
 
       setSyncResp(null);
       if (errorIsLiveUpdateError(e)) setSyncError(e);
-      console.log('catch handled:', e);
     }
   }
 
@@ -293,6 +290,22 @@ const Home: React.FC = () => {
               <pre style={{ overflow: 'auto', textAlign: 'left', display: 'inline-block' }}>
                 {JSON.stringify(syncResp, null, 2)}
               </pre>
+            )}
+            {syncError && (
+              <IonText>
+                {(() => {
+                  switch (syncError.failStep) {
+                    case 'UNPACK':
+                      return ('An error occurred while unpacking an update. ' + 
+                        'Please make sure there is sufficient storage on the device.')
+                    case 'DOWNLOAD':
+                      return ('An error occurred while downloading an update. ' +
+                        'Please make sure your device is online.')
+                    default:
+                      return `An error occurred while downloading an update.`
+                  }
+                })()}
+              </IonText>
             )}
             {syncError && (
               <pre style={{ overflow: 'auto', textAlign: 'left', display: 'inline-block' }}>
