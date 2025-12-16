@@ -69,7 +69,7 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle size="large" id="demo-header">Fedcap Demo {packageJsonVersion}</IonTitle>
+          <IonTitle size="large" id="demo-header">Fedcap Update {packageJsonVersion}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
