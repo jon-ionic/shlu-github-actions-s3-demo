@@ -37,7 +37,7 @@ const Home: React.FC = () => {
     const results: SyncResult[] = [];
     const errors: LiveUpdateError[] = [];
 
-    await syncSome({ appIds: ['e42f72bb', 'df240a48'] }, {
+    await syncSome({ appIds: ['e42f72bb', 'df240a48', '42f81456'] }, {
       onAppComplete: (result: SyncResult) => {
         results.push(result);
         setSyncResults([...syncResults, result]);
@@ -69,7 +69,7 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle size="large" id="demo-header">Fedcap Update {packageJsonVersion}</IonTitle>
+          <IonTitle size="large" id="demo-header">Fedcap Shell {packageJsonVersion}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
