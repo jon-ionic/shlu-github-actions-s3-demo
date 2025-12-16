@@ -1,0 +1,10 @@
+{
+    "apps":
+    [
+        {
+            "appId": "42f81456",
+            "root": ".",
+            "dependencyInstallCommand": "npm ci --legacy-peer-deps"
+        }
+    ]
+}
