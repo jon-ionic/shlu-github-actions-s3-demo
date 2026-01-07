@@ -1,21 +1,21 @@
 PODS:
-  - Capacitor (7.0.1):
+  - Capacitor (8.0.0):
     - CapacitorCordova
-  - CapacitorApp (7.0.0):
+  - CapacitorApp (8.0.0):
     - Capacitor
-  - CapacitorCordova (7.0.1)
-  - CapacitorDevice (7.0.0):
+  - CapacitorCordova (8.0.0)
+  - CapacitorDevice (8.0.0):
     - Capacitor
-  - CapacitorHaptics (7.0.0):
+  - CapacitorHaptics (8.0.0):
     - Capacitor
-  - CapacitorKeyboard (7.0.0):
+  - CapacitorKeyboard (8.0.0):
     - Capacitor
   - CapacitorLiveUpdates (0.4.0):
     - Capacitor
     - IonicLiveUpdates (~> 0.5.6)
-  - CapacitorSplashScreen (7.0.0):
+  - CapacitorSplashScreen (8.0.0):
     - Capacitor
-  - CapacitorStatusBar (7.0.0):
+  - CapacitorStatusBar (8.0.0):
     - Capacitor
   - IonicLiveUpdates (0.5.6)
 
@@ -55,15 +55,15 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/status-bar"
 
 SPEC CHECKSUMS:
-  Capacitor: 23fff43571a4d1e3ee7d67b5a3588c6e757c2913
-  CapacitorApp: 45cb7cbef4aa380b9236fd6980033eb5cde6fcd2
-  CapacitorCordova: 63d476958d5022d76f197031e8b7ea3519988c64
-  CapacitorDevice: 62066b65e148a133df7b8c5bf972ba835b329748
-  CapacitorHaptics: 1fba3e460e7614349c6d5f868b1fccdc5c87b66d
-  CapacitorKeyboard: 2c26c6fccde35023c579fc37d4cae6326d5e6343
+  Capacitor: 79e40e5e76f852965dce30406c65253fa154e24a
+  CapacitorApp: cfa0120a1f3a6f69d4d37d3041782aa5c5167d0b
+  CapacitorCordova: 5dc3912d25ef770a3fe0f431bb65c9fbfa2e92f9
+  CapacitorDevice: 56baac70d6493c42756676d521e99eea5cc83e71
+  CapacitorHaptics: 7a77ce744c4b516b3ffd7f8c96d3de574d77b898
+  CapacitorKeyboard: 0a2e7c0635ccf3db60abed14bd6f35147ce25942
   CapacitorLiveUpdates: 1f47570fe78d925bfe95ab7da1c6e706eb2d5471
-  CapacitorSplashScreen: f4e58cc02aafd91c7cbaf32a3d1b44d02a115125
-  CapacitorStatusBar: 438e90beeeefa8276b24e6c5991cb02dd13e51bf
+  CapacitorSplashScreen: 4b78177a21f0f73ccc1c78dd93b2a94854ac4b83
+  CapacitorStatusBar: c6fa2d404083e41d145ea56698707a6986d4428b
   IonicLiveUpdates: fbc64a7e9ce18a25b992200ec80ce37d5e6eb5aa
 
 PODFILE CHECKSUM: 4fd1dc4174ee4edb57ebbb2ef61d8a8b4fb3bf2f
