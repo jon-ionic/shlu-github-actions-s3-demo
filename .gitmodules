@@ -1,3 +1,3 @@
-[submodule "lib/dse-capstone"]
-	path = lib/dse-capstone
-	url = ../dse-capstone.git
+[submodule "lib/portals-react-native-demo"]
+	path = lib/portals-react-native-demo
+	url = ../portals-react-native-demo.git
