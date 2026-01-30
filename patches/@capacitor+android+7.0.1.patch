@@ -1,0 +1,21 @@
+diff --git a/node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/BridgeActivity.java b/node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/BridgeActivity.java
+index dcb1b56..8a2d44f 100644
+--- a/node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/BridgeActivity.java
++++ b/node_modules/@capacitor/android/capacitor/src/main/java/com/getcapacitor/BridgeActivity.java
+@@ -39,10 +39,14 @@ public class BridgeActivity extends AppCompatActivity {
+             Logger.error("Error loading plugins.", ex);
+         }
+ 
+-        this.load();
++        try {
++            this.load();
++        } catch (InterruptedException e) {
++            throw new RuntimeException(e);
++        }
+     }
+ 
+-    protected void load() {
++    protected void load() throws InterruptedException {
+         Logger.debug("Starting BridgeActivity");
+ 
+         bridge = bridgeBuilder.addPlugins(initialPlugins).setConfig(config).create();

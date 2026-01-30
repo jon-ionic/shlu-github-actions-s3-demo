@@ -1,0 +1,45 @@
+diff --git a/node_modules/@ionic-enterprise/federated-capacitor/android/src/main/java/com/capacitorjs/federated/FedCapPlugin.java b/node_modules/@ionic-enterprise/federated-capacitor/android/src/main/java/com/capacitorjs/federated/FedCapPlugin.java
+index 711d42b..34c1e9c 100644
+--- a/node_modules/@ionic-enterprise/federated-capacitor/android/src/main/java/com/capacitorjs/federated/FedCapPlugin.java
++++ b/node_modules/@ionic-enterprise/federated-capacitor/android/src/main/java/com/capacitorjs/federated/FedCapPlugin.java
+@@ -104,7 +104,7 @@ public class FedCapPlugin extends Plugin {
+         try {
+             FederatedCapacitorBridgeActivity activity = (FederatedCapacitorBridgeActivity) getActivity();
+             activity.checkForUpdatedApps();
+-        } catch (ClassCastException e) {
++        } catch (ClassCastException | InterruptedException e) {
+             Logger.error("Parent activity must be a FederatedCapacitorBridgeActivity!");
+             return;
+         }
+@@ -137,7 +137,7 @@ public class FedCapPlugin extends Plugin {
+         try {
+             FederatedCapacitorBridgeActivity activity = (FederatedCapacitorBridgeActivity) getActivity();
+             activity.checkForUpdatedApps();
+-        } catch (ClassCastException e) {
++        } catch (ClassCastException | InterruptedException e) {
+             Logger.error("Parent activity must be a FederatedCapacitorBridgeActivity!");
+             return;
+         }
+diff --git a/node_modules/@ionic-enterprise/federated-capacitor/android/src/main/java/com/capacitorjs/federated/FederatedCapacitorBridgeActivity.java b/node_modules/@ionic-enterprise/federated-capacitor/android/src/main/java/com/capacitorjs/federated/FederatedCapacitorBridgeActivity.java
+index 49922c8..ec22035 100644
+--- a/node_modules/@ionic-enterprise/federated-capacitor/android/src/main/java/com/capacitorjs/federated/FederatedCapacitorBridgeActivity.java
++++ b/node_modules/@ionic-enterprise/federated-capacitor/android/src/main/java/com/capacitorjs/federated/FederatedCapacitorBridgeActivity.java
+@@ -23,7 +23,7 @@ public class FederatedCapacitorBridgeActivity extends BridgeActivity {
+      * Overridden load() method constructs a Bridge with a RouteProcessor.
+      */
+     @Override
+-    protected void load() {
++    protected void load() throws InterruptedException {
+         Logger.debug("Starting FederatedCapacitorBridgeActivity");
+ 
+         // Read in the FedCap Config
+@@ -48,7 +48,8 @@ public class FederatedCapacitorBridgeActivity extends BridgeActivity {
+         checkForUpdatedApps();
+     }
+ 
+-    void checkForUpdatedApps() {
++    void checkForUpdatedApps() throws InterruptedException {
++        Thread.sleep(1000);
+         // Prepopulate shell app live update path if present
+         LiveUpdateConfig shellLiveUpdateConfig = federatedCapacitorConfig.getShellApp().getLiveUpdateConfig();
+         if (shellLiveUpdateConfig != null) {
